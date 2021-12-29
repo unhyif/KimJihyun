@@ -52,10 +52,6 @@ body {
   display: none;
 }
 
-#header-search h2 {
-  display: none;
-}
-
 #header-search fieldset {
   margin-left: 20px;
   padding: 12px 0 12px 10px;
