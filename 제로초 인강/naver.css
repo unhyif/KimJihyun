@@ -299,6 +299,7 @@ nav ul {
 
 #search-ranking:hover ul {
   display: inline-block;
+  z-index: 100;
 }
 
 #rank-number {
