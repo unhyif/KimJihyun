@@ -274,10 +274,81 @@ nav li.more:first-child span:first-child {
   font-size: 16px;
 }
 
+#rank-title {
+  letter-spacing: -1px;
+  font-size: 14px;
+}
+
 main {
   display: inline-block;
   width: 100%;
   background-color: #f2f4f7;
+}
+
+#main-centered {
+  padding: 8px 10px 0;
+  width: 1100px;
+}
+
+main .center-align > div div {
+  display: inline-block;
+  background-color: white;
+}
+
+#main-ad {
+  width: 740px;
+  height: 120px;
+  background: #555;
+  vertical-align: top;
+}
+
+#main-login {
+  display: inline-block;
+  width: 332px;
+  height: 120px;
+  vertical-align: top;
+}
+
+#main-ytn {
+  width: 740px;
+  height: 46px;
+}
+
+#main-newstand {
+  width: 740px;
+  height: 246px;
+}
+
+#main-weather {
+  width: 332px;
+  height: 142px;
+}
+
+#main-second-ad {
+  width: 332px;
+  height: 150px;
+  background: #555;
+}
+
+#main-category {
+  width: 740px;
+  height: 837px;
+}
+
+#main-shopping {
+  width: 332px;
+  height: 837px;
+}
+
+#main-event {
+  width: 740px;
+  height: 130px;
+}
+
+#main-third-ad {
+  width: 332px;
+  height: 130px;
+  background-color: #555;
 }
 
 /* .first,
@@ -293,4 +364,4 @@ main {
 .second {
   background: green;
   margin-top: 20px;
-} */
+} */ ;
