@@ -6,7 +6,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: Dotum, "돋움", Helvetica, "Apple SD Gothic Neo", sans-serif;
+  font-family: sans-serif;
 }
 
 #fixed {
@@ -97,7 +97,7 @@ header {
   padding: 0;
   outline: none;
   vertical-align: top;
-  width: 405px;
+  width: 395px;
   height: 23px;
 }
 
@@ -109,7 +109,28 @@ header {
   background: #03cf5d;
   position: absolute;
   top: -2px;
-  right: -1px;
+  right: 0;
+}
+#search-keyboard {
+  background-image: url(./sp_search.png);
+  background-repeat: no-repeat;
+  background-position: -33px -60px;
+  width: 19px;
+  height: 11px;
+  display: inline-block;
+  margin: 0 3px;
+  vertical-align: middle;
+}
+
+#search-history {
+  background-image: url(./sp_search.png);
+  background-repeat: no-repeat;
+  background-position: -87px -60px;
+  width: 9px;
+  height: 4px;
+  display: inline-block;
+  margin: 0 6px;
+  vertical-align: middle;
 }
 
 #search-image {
@@ -148,7 +169,6 @@ nav li span:first-child {
 }
 
 nav li:first-child span.nav-item-mail {
-  /* span:first-child */
   width: 25px;
   background-position: 0 -285px;
   margin-left: 0;
@@ -179,12 +199,17 @@ nav li:nth-child(6) span:first-child {
   background-position: -70px -285px;
 }
 
+nav li:nth-child(7) span:first-child {
+  width: 35px;
+  background-position: -125px -130px;
+}
+
 .nav-divider {
   display: inline-block;
   margin: 18px 16px 0;
   width: 1px;
   height: 14px;
-  background: #ebeef3;
+  background: #d3d3d3;
 }
 
 #search-ranking {
