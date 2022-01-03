@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --light-info: rgb(0, 185, 185);
+  --dark-info: rgb(0, 165, 165);
+}
+
+body {
+  font-family: "Roboto", sans-serif !important;
+}
+a {
+  color: inherit !important;
+}
+
+.bg-dark {
+  background-color: rgb(45, 51, 54) !important;
+}
+.bg-info {
+  background-color: var(--light-info) !important;
+}
+button.btn-info {
+  background-color: var(--light-info) !important;
+}
+button.btn-info:hover {
+  background-color: var(--dark-info) !important;
+}
+
+.nav-item:hover {
+  color: white;
+}
+.btn-outline-info:hover {
+  background-color: var(--dark-info);
+  border: var(--dark-info);
+  color: white;
+}
+nav .modal-title {
+  font-weight: 500;
+}
+nav .modal-body p:first-child {
+  font-size: 1.2rem;
+}
+
+#pirogramming {
+  height: 100vh;
+  padding: 0 10rem;
+}
+.divider {
+  height: 0.2rem;
+}
+
+#intro {
+  height: 100vh;
+}
+
+#highlights {
+  padding: 0 10rem;
+}
+.feature i {
+  font-size: 5rem;
+}
+
+#gallery {
+  padding: 0 5rem;
+}
+#gallery img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+}
+
+#contact {
+  padding: 0 10rem;
+}
+.inputs {
+  gap: 1rem;
+}
+#contact button {
+  min-width: min-content;
+}
+input,
+textarea {
+  border: none;
+  border-radius: 0.3rem;
+}
