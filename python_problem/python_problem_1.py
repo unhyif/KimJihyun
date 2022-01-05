@@ -19,14 +19,19 @@ def brGame(players_list):
         if main_player == players[1]: # player 차례면 숫자를 입력 받음
             while True: # 1 이상 3 이하의 정수를 입력받는 과정
                 called_num = input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")
-
-                if called_num.isdigit(): # 0 이상의 정수를 입력받았을 때
-                    if 1 <= int(called_num) <= 3: # 1 이상 3 이하 정수일 때
-                        called_num = int(called_num)
-                        break
-                    else: # 0 또는 3 초과인 정수일 때
-                        print("1,2,3 중 하나를 입력하세요")
-                else: # 음수, 소수, 문자를 입력받았을 때
+                
+                try:
+                    called_num = float(called_num)
+                    if called_num % 1 == 0: # 정수를 입력받았을 때
+                        if 1 <= int(called_num) <= 3: # 1 이상 3 이하 정수일 때
+                            called_num = int(called_num)
+                            break
+                        else: # 그 외 정수를 입력받았을 때
+                            print("1,2,3 중 하나를 입력하세요")
+                    else: # 소수를 입력받았을 때
+                        print("정수를 입력하세요")
+                        
+                except: # 문자를 입력받았을 때
                     print("정수를 입력하세요")
 
         else: # computer 차례면 랜덤으로 숫자 부름
