@@ -27,4 +27,8 @@ while num < 31:
         num += 1
         print(f"{main_player} :", num)
         if num == 31:
+            players.remove(main_player) # 승자만 players에 남겨 놓기 위해
             break
+
+
+print(f"{players[0]} win!")
