@@ -47,59 +47,65 @@ while True :
     if choice == "1":
         info = input("Enter name mid-score final-score : ").split()
 
-        if len(info) != 3: # 입력된 데이터 갯수가 3이 아닐 때
-            print("Num of data is not 3!")
+        try:
+            if len(info) != 3: # 입력된 데이터 갯수가 3이 아닐 때
+                raise Exception("Num of data is not 3!")
 
-        else:
             name, mid_score, final_score = info
 
             if name in data: # 이미 존재하는 이름일 때
-                print("Already exist name!")
-            elif not(mid_score.isdigit() and int(mid_score) != 0) or \
-                not(final_score.isdigit() and int(final_score) != 0): # 점수 값이 양의 정수가 아닐 때
-                print("Score is not positive integer!")
-            else:
-                Menu1(name, int(mid_score), int(final_score))
+                raise Exception("Already exist name!")
+            if not((mid_score.isdigit() and int(mid_score) != 0) and \
+                (final_score.isdigit() and int(final_score) != 0)): # 점수 값이 양의 정수가 아닐 때
+                raise Exception("Score is not positive integer!")
+
+            Menu1(name, int(mid_score), int(final_score))
+
+        except Exception as e:
+            print(e)
 
     elif choice == "2":
-        if not data:
-            print("No student data!")
+        try:
+            if not data:
+                raise Exception("No student data!")
 
-        else:
             print("Grading to all students.")
             for person in data:
                 if len(data[person]) != 3: # 학점이 부여되지 않은 학생에 대해
                     Menu2(person)
 
-    elif choice == "3":
-        if not data:
-            print("No student data!")
+        except Exception as e:
+            print(e)
 
-        else:
+    elif choice == "3":
+        try:
+            if not data:
+                raise Exception("No student data!")
+
             for person in data:
                 if len(data[person]) != 3: # 학점이 부여되지 않은 학생이 있을 때
-                    print("There is a student who didn't get grade.")
-                    break
-            else: # 모든 학생들의 학점이 부여됐을 때
-                Menu3()
+                    raise Exception("There is a student who didn't get grade.")
+
+            Menu3() # 모든 학생들의 학점이 부여됐을 때
+        
+        except Exception as e:
+            print(e)
 
     elif choice == "4":
-        if not data:
-            print("No student data!")
+        try:
+            if not data:
+                raise Exception("No student data!")
 
-        else:
             del_name = input("Enter the name to delete : ")
 
-            if del_name in data:
-                Menu4(del_name)
-                print(f"{del_name} student information is deleted.")
-            else:
-                print("Not exist name!")
+            if del_name not in data:
+                raise Exception("Not exist name!")
+            
+            Menu4(del_name)
+            print(f"{del_name} student information is deleted.")
 
-        #예외사항 처리(저장된 학생 정보의 유무)
-        #예외사항이 아닌 경우, 삭제할 학생 이름 입력 받기
-        #입력 받은 학생의 존재 유무 체크 후, 없으면 "Not exist name!" 출력
-        #있으면(예를 들어 kim 이라 하면), 4번 함수 호출 후에 "kim student information is deleted." 출력
+        except Exception as e:
+            print(e)
 
     elif choice == "5":
         print("Exit Program!")
