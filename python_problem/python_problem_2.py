@@ -1,12 +1,10 @@
 data = {}
 
 def Menu1(name="", mid_score=0, final_score=0):
-    global data
     data[name] = [mid_score, final_score]
 
 def Menu2(person=""):
-    global data
-    avg = (data[person][0] + data[person][1]) / 2
+    avg = sum(data[person]) / 2
 
     if avg < 70:
         data[person].append("D")
@@ -24,13 +22,9 @@ name      mid       final     grade
 ------------------------------------'''
 )
     for person in data:
-        print(person, end=" "*(10-len(person)))
-        print(data[person][0], end=" "*(10-len(str(data[person][0])))) # table 정렬 위해 점수를 잠시 string화
-        print(data[person][1], end=" "*(10-len(str(data[person][1]))))
-        print(data[person][2])
+        print(person.ljust(10) + str(data[person][0]).ljust(10) + str(data[person][1]).ljust(10) + data[person][2])
 
 def Menu4(del_name=""):
-    global data
     del data[del_name]
 
 print("*Menu*******************************")
@@ -41,7 +35,7 @@ print("4. Deleting students Info")
 print("5. Exit program")
 print("*************************************")
 
-while True :
+while True:
     choice = input("Choose menu 1, 2, 3, 4, 5 : ")
 
     if choice == "1":
