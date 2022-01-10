@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "S-Core Dream 5";
+  src: url("S-CoreDream-5Medium.woff2") format("woff2"),
+    url("S-CoreDream-5Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --light-pink: #ff94c2;
   --pink: #f06292;
@@ -6,8 +15,6 @@
 html {
   font-size: 62.5%;
   font-family: "S-Core Dream 5";
-  font-weight: 500;
-  font-style: normal;
 }
 input,
 button {
