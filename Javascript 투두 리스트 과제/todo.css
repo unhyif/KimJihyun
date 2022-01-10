@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "S-Core Dream 5";
+  src: url("S-CoreDream-5Medium.woff2") format("woff2"),
+    url("S-CoreDream-5Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --light-pink: #ff94c2;
+  --pink: #f06292;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "S-Core Dream 5";
+}
+input,
+button {
+  font-family: "S-Core Dream 5";
+  border: none;
+}
+input {
+  background-color: inherit;
+}
+button {
+  border-radius: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+h1 {
+  color: var(--pink);
+  font-size: 3.5rem;
+}
+
+.add-container {
+  background-color: rgb(245, 245, 245);
+  font-size: 1.4rem;
+  gap: 1rem;
+  border-radius: 2rem;
+}
+.add-btn {
+  color: var(--light-pink);
+  font-size: 2.5rem;
+}
+.add-btn:hover {
+  color: var(--pink);
+}
+
+table {
+  font-size: 1.7rem;
+}
+thead {
+  background-color: var(--pink);
+}
+th:first-child {
+  width: 5rem;
+}
+tbody tr {
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+tbody tr:hover {
+  background-color: #ffe5f1;
+}
+tr:last-child {
+  border-bottom: none;
+}
+
+.btn-container {
+  gap: 1.5rem;
+}
+.btn-container button {
+  background-color: var(--light-pink);
+  padding: 0.8rem;
+  font-size: 1.6rem;
+  color: white;
+}
+.btn-container button:hover {
+  background-color: var(--pink);
+}
