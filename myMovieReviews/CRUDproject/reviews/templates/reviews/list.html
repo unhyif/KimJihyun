@@ -1,0 +1,45 @@
+{% extends 'reviews/base.html' %} {% load static %} {% block script %}
+<script defer src="{% static 'js/reviews.js' %}"></script>
+{% endblock %} {% block content %}
+
+<div class="d-flex justify-content-end mb-5">
+  <a href="/write" class="write-btn fs-4 fw-bold btn btn-danger text-white"
+    >Leave a review ✨</a
+  >
+</div>
+
+<section id="reviews" class="d-flex flex-wrap">
+  {% for review in reviews %}
+  <article class="review d-flex flex-column align-items-center p-4">
+    <div class="review_img">
+      <img src="https://picsum.photos/200/300" alt="{{review.title}}" />
+    </div>
+
+    <a href="{% url 'reviews:detail' review.id %}"
+      ><h2 class="review_title fs-2 my-4 text-center lh-base">
+        {{review.title}}
+      </h2></a
+    >
+
+    <div class="review_details d-flex flex-column align-items-center">
+      <div class="review_year">
+        <span class="fw-bold text-secondary me-2">개봉년도</span
+        ><span>{{review.year}}</span>
+      </div>
+      <div class="review_genre">
+        <span class="fw-bold text-secondary me-2">장르</span
+        ><span>{{review.get_genre_display}}</span>
+      </div>
+      <div class="review_running-time">
+        <span class="fw-bold text-secondary me-2">러닝타임</span
+        ><span>{{review.minute_to_hour}}</span>
+      </div>
+      <div class="review_rating">
+        <span class="stars text-warning me-2">{{review.rating}}</span
+        ><span>({{review.rating}})</span>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

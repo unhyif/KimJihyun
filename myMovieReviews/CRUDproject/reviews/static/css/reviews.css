@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap");
+@import "reset.css";
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-size: 1.3rem;
+  color: rgb(40, 40, 40);
+}
+a:hover {
+  color: inherit;
+}
+input {
+  border: none;
+}
+
+header a {
+  margin-left: 1%;
+}
+header img {
+  box-sizing: content-box;
+  width: 15rem;
+}
+.btn {
+  border-radius: 0.5rem;
+}
+
+#reviews {
+  padding: 0 10rem;
+  gap: 3rem;
+}
+.write-btn {
+  margin-right: 10%;
+}
+.review {
+  background-color: rgb(240, 240, 240);
+  border-radius: 1rem;
+  transition: all 0.4s ease-in-out;
+}
+#reviews .review:hover {
+  transform: scale(1.05);
+}
+#reviews .review_details {
+  gap: 1rem;
+}
+.review_title {
+  font-weight: 700;
+}
+#reviews .review_title {
+  width: 20rem;
+}
+
+#detail .review {
+  width: 80%;
+  padding: 5%;
+}
+#detail .review_details {
+  gap: 2rem;
+}
+.btn-container a:last-child {
+  margin-right: 10%;
+}
