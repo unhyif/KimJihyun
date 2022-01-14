@@ -1,5 +1,4 @@
-<img width="400" alt="sh" src="https://user-images.githubusercontent.com/93528293/149597276-517c4401-40db-452e-8750-b85f14726bb0.png">
-<img width="500" alt="sh2" src="https://user-images.githubusercontent.com/93528293/149596146-401ef050-a987-4489-ba1e-07271c1ed17a.png">
+<img width="400" alt="sh" src="https://user-images.githubusercontent.com/93528293/149597276-517c4401-40db-452e-8750-b85f14726bb0.png"> <img width="500" alt="sh2" src="https://user-images.githubusercontent.com/93528293/149596146-401ef050-a987-4489-ba1e-07271c1ed17a.png">
 
 # My Movie Reviews
 
