@@ -3,7 +3,23 @@ from .models import Review
 from .forms import ReviewForm
 
 def show_list(request):
-    reviews = Review.objects.all()
+    reviews = Review.objects.all()   
+    ctx = {"reviews":reviews}
+    return render(request, template_name="reviews/list.html", context=ctx)
+
+def show_ordered_list(request, pk):
+    if pk == 4:
+        return redirect("/")
+    elif pk == 1:
+        reviews = Review.objects.all().order_by("-rating")
+    elif pk == 2:
+        reviews = Review.objects.all().order_by("rating")
+    elif pk == 3:
+        reviews = Review.objects.all().order_by("-created_at") 
+    elif pk == 5:
+        reviews = Review.objects.all().order_by("-running_time")
+    elif pk == 6:
+        reviews = Review.objects.all().order_by("running_time")    
     ctx = {"reviews":reviews}
     return render(request, template_name="reviews/list.html", context=ctx)
 

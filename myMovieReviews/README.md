@@ -1,4 +1,5 @@
-<img width="400" alt="sh" src="https://user-images.githubusercontent.com/93528293/149586774-f835518e-37ff-4870-b513-4f6e9917b5af.png"> <img width="500" alt="sh2" src="https://user-images.githubusercontent.com/93528293/149586812-126f08f9-a9a4-4211-b621-86da0fe42551.png">
+<img width="400" alt="sh" src="https://user-images.githubusercontent.com/93528293/149597276-517c4401-40db-452e-8750-b85f14726bb0.png">
+<img width="500" alt="sh2" src="https://user-images.githubusercontent.com/93528293/149596146-401ef050-a987-4489-ba1e-07271c1ed17a.png">
 
 # My Movie Reviews
 
@@ -31,7 +32,7 @@ rating.forEach((value) => {
 ### Backend
 
 - 개봉년도, 장르, 별점 field에 `choices` 사용
-- `@property decorator`를 통해 만든 분->시간 변환 메소드를 template에서 object의 property처럼 사용
+- 러닝타임의 분→시간 변환: `@property decorator`를 통해 만든 메소드를 template에서 object의 property처럼 사용
 
 ```Python
 # models.py
@@ -48,3 +49,5 @@ rating.forEach((value) => {
 ```Html
 <span>{{review.minute_to_hour}}</span>
 ```
+
+- 리스트 정렬: `select` element에 change event가 일어날 때 `window.location.href` 변경<br>(현재 8000번 port로 접속 시에만 이용 가능 😢)

@@ -34,6 +34,9 @@ header img {
 .write-btn {
   margin-right: 10%;
 }
+.order-container {
+  padding-right: 10%;
+}
 .review {
   background-color: rgb(240, 240, 240);
   border-radius: 1rem;
@@ -50,6 +53,12 @@ header img {
 }
 #reviews .review_title {
   width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 #detail .review {

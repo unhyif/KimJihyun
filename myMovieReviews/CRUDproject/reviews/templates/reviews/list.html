@@ -2,10 +2,21 @@
 <script defer src="{% static 'js/reviews.js' %}"></script>
 {% endblock %} {% block content %}
 
-<div class="d-flex justify-content-end mb-5">
+<div class="d-flex justify-content-end mb-3">
   <a href="/write" class="write-btn fs-4 fw-bold btn btn-danger text-white"
     >Leave a review ✨</a
   >
+</div>
+<div class="order-container d-flex justify-content-end mb-5">
+  <select class="form-select w-auto" aria-label="Default select example">
+    <option selected>--- 정렬 기준 ---</option>
+    <option value="1">높은 별점</option>
+    <option value="2">낮은 별점</option>
+    <option value="3">최근 등록일</option>
+    <option value="4">오래된 등록일</option>
+    <option value="5">긴 상영 시간</option>
+    <option value="6">짧은 상영 시간</option>
+  </select>
 </div>
 
 <section id="reviews" class="d-flex flex-wrap">
