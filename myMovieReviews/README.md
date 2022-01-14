@@ -1,3 +1,5 @@
+<img width="400" alt="sh" src="https://user-images.githubusercontent.com/93528293/149586774-f835518e-37ff-4870-b513-4f6e9917b5af.png"> <img width="500" alt="sh2" src="https://user-images.githubusercontent.com/93528293/149586812-126f08f9-a9a4-4211-b621-86da0fe42551.png">
+
 # My Movie Reviews
 
 - 구현한 기능: 1 - 11
