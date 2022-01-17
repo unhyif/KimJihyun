@@ -1,0 +1,22 @@
+{% extends 'reviews/base.html' %} {% load bootstrap5 %} {% bootstrap_css %} {%
+bootstrap_javascript %} {% block title %}<title>Leave a review ✏</title>
+{% endblock %} {% block content %}
+<form action="" method="POST" class="w-50 mx-auto fs-4">
+  {% csrf_token %}
+  <table>
+    {% bootstrap_form form %}
+  </table>
+
+  <div class="d-flex justify-content-center">
+    {% if pk %}
+    <button type="submit" class="fs-4 fw-bold btn btn-danger text-white mt-4">
+      Save changes ✔
+    </button>
+    {% else %}
+    <button type="submit" class="fs-4 fw-bold btn btn-danger text-white mt-4">
+      Upload ✔
+    </button>
+    {% endif %}
+  </div>
+</form>
+{% endblock %}

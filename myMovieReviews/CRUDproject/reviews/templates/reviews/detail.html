@@ -1,0 +1,67 @@
+{% extends 'reviews/base.html' %} {% load static %} {% block script %}
+<script defer src="{% static 'js/reviews.js' %}"></script>
+{% endblock %} {% block title %} <title>{{review.title}}</title> {% endblock %}
+{% block content %}
+
+<div class="btn-container d-flex justify-content-end mb-4">
+  <a
+    href="{% url 'reviews:update' review.id %}"
+    class="fs-4 fw-bold btn btn-danger text-white me-4"
+    >Edit</a
+  >
+  <a
+    href="{% url 'reviews:delete' review.id %}"
+    class="fs-4 fw-bold btn btn-danger text-white"
+    >Delete</a
+  >
+</div>
+
+<section id="detail">
+  <article class="review py-5 mx-auto">
+    <div
+      class="horizontal-container d-flex justify-content-between align-items-center"
+    >
+      <div class="review_content">
+        <h2 class="review_title fs-1 mb-5 lh-base">{{review.title}}</h2>
+
+        <div class="review_details d-flex flex-column fs-2">
+          <div class="review_year">
+            <span class="fw-bold text-secondary me-3">개봉년도</span
+            ><span>{{review.year}}</span>
+          </div>
+          <div class="review_director">
+            <span class="fw-bold text-secondary me-3 lh-base">감독</span
+            ><span class="lh-base">{{review.director}}</span>
+          </div>
+          <div class="review_actorr">
+            <span class="fw-bold text-secondary me-3">주연</span
+            ><span class="lh-base">{{review.actor}}</span>
+          </div>
+          <div class="review_genre">
+            <span class="fw-bold text-secondary me-3">장르</span
+            ><span>{{review.get_genre_display}}</span>
+          </div>
+          <div class="review_running-time">
+            <span class="fw-bold text-secondary me-3">러닝타임</span
+            ><span>{{review.minute_to_hour}}</span>
+          </div>
+          <div class="review_rating">
+            <span class="fw-bold text-secondary me-3">별점</span
+            ><span class="stars text-warning me-2">{{review.rating}}</span
+            ><span>({{review.rating}})</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review_img ms-5">
+        <img src="https://picsum.photos/300/400" alt="{{review.title}}" />
+      </div>
+    </div>
+
+    <div class="review_review mt-5 fs-2">
+      <span class="fw-bold text-secondary">리뷰</span>
+      <p class="mt-3 lh-base">{{review.review}}</p>
+    </div>
+  </article>
+</section>
+{% endblock %}
