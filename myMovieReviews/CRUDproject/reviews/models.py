@@ -35,8 +35,7 @@ class Review(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def minute_to_hour(self):
+    def running_time_by_hour(self):
         h, m = "", ""
         if self.running_time//60:
             h = f"{self.running_time//60}시간 "

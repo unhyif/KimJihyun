@@ -13,7 +13,9 @@ rating.forEach((value) => {
 });
 
 const select = document.querySelector("select");
-if (select) {
+if (!select) {
+  return;
+} else {
   select.addEventListener("change", function () {
     let value = select.options[select.selectedIndex].value;
     window.location.href = `http://127.0.0.1:8000/order_by_${value}`;

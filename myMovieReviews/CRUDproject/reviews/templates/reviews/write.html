@@ -1,6 +1,7 @@
 {% extends 'reviews/base.html' %} {% load bootstrap5 %} {% bootstrap_css %} {%
-bootstrap_javascript %} {% block title %}<title>Leave a review ✏</title>
-{% endblock %} {% block content %}
+bootstrap_javascript %} {% block title %} {% if not pk %}
+<title>Leave a review ✏</title> {% else %} <title>Edit your review ✏</title>
+{% endif %} {% endblock %} {% block content %}
 <form action="" method="POST" class="w-50 mx-auto fs-4">
   {% csrf_token %}
   <table>

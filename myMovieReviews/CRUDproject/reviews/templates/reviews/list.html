@@ -10,12 +10,12 @@
 <div class="order-container d-flex justify-content-end mb-5">
   <select class="form-select w-auto" aria-label="Default select example">
     <option selected>--- 정렬 기준 ---</option>
-    <option value="1">높은 별점</option>
-    <option value="2">낮은 별점</option>
-    <option value="3">최근 등록일</option>
-    <option value="4">오래된 등록일</option>
-    <option value="5">긴 상영 시간</option>
-    <option value="6">짧은 상영 시간</option>
+    <option value="h-rating">높은 별점</option>
+    <option value="l-rating">낮은 별점</option>
+    <option value="latest">최근 등록일</option>
+    <option value="old">오래된 등록일</option>
+    <option value="l-runtime">긴 상영 시간</option>
+    <option value="s-runtime">짧은 상영 시간</option>
   </select>
 </div>
 
@@ -43,7 +43,7 @@
       </div>
       <div class="review_running-time">
         <span class="fw-bold text-secondary me-2">러닝타임</span
-        ><span>{{review.minute_to_hour}}</span>
+        ><span>{{review.running_time_by_hour}}</span>
       </div>
       <div class="review_rating">
         <span class="stars text-warning me-2">{{review.rating}}</span

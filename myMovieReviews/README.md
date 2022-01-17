@@ -50,3 +50,16 @@ rating.forEach((value) => {
 ```
 
 - 리스트 정렬: `select` element에 change event가 일어날 때 `window.location.href` 변경<br>(현재 8000번 port로 접속 시에만 이용 가능 😢)
+
+---
+
+## Updates
+
+### Backend
+
+#### 220118
+
+- Review model에서 `@property decorator` 제거 ∵ template에서 object의 메소드 사용 가능
+- `show_ordered_list` view 함수 제거: `show_list` 함수가 default value parameter인 order을 갖도록 하여, 정렬된 리스트 또한 보여주도록 함
+- `show_list` view 함수 보완: 사용자가 잘못된 정렬 기준을 URL에 직접 입력했을 때, 홈 화면으로 redirect 시킴
+- Write할 때, Edit할 때 html title 다르도록 수정

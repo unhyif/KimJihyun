@@ -2,24 +2,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Review
 from .forms import ReviewForm
 
-def show_list(request):
-    reviews = Review.objects.all()   
-    ctx = {"reviews":reviews}
-    return render(request, template_name="reviews/list.html", context=ctx)
-
-def show_ordered_list(request, pk):
-    if pk == 4:
-        return redirect("/")
-    elif pk == 1:
+def show_list(request, order=None):
+    if order == None:
+        reviews = Review.objects.all()
+    elif order == "h-rating":
         reviews = Review.objects.all().order_by("-rating")
-    elif pk == 2:
+    elif order == "l-rating":
         reviews = Review.objects.all().order_by("rating")
-    elif pk == 3:
-        reviews = Review.objects.all().order_by("-created_at") 
-    elif pk == 5:
+    elif order == "latest":
+        reviews = Review.objects.all().order_by("-created_at")
+    elif order == "l-runtime":
         reviews = Review.objects.all().order_by("-running_time")
-    elif pk == 6:
-        reviews = Review.objects.all().order_by("running_time")    
+    elif order == "s-runtime":
+        reviews = Review.objects.all().order_by("running_time")   
+    else:
+        return redirect("/")       
     ctx = {"reviews":reviews}
     return render(request, template_name="reviews/list.html", context=ctx)
 
