@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<h2 class="text-center">
+  {% if idea_yes %}Idea{% else %}DevTool{% endif %} List
+</h2>
+<div class="object-container d-flex">
+  {% for object in objects %}
+  <div
+    class="object me-4 border border-2 border-light d-flex flex-column align-items-center"
+  >
+    {% if idea_yes %} {% if object.image %}
+    <img src="{{object.image.url}}" width="150" height="225" />
+    {% else %}
+    <img src="https://picsum.photos/seed/{{object.id}}/150/225" />
+    {% endif %}
+    <a href="{% url 'develop:show_idea' object.id%}" class="title">
+      <h3>{{object.title}}</h3>
+    </a>
+    <div>예상 개발툴 : {{object.devtool}}</div>
+    <div>
+      아이디어 관심도 : <span class="interest">{{object.interest}}</span>
+      <button class="plus btn btn-sm btn-warning me-2 text-white fw-bold">
+        +</button
+      ><button class="minus btn btn-sm btn-warning text-white fw-bold">
+        -
+      </button>
+    </div>
+    <script src="{% static 'ajax.js' %}"></script>
+    {% else %}
+    <a href="{% url 'develop:show_tool' object.id%}"
+      ><h3>{{object.name}}</h3>
+    </a>
+    <h5>{{object.kind}}</h5>
+    <div class="text-center">{{object.description}}</div>
+    {% endif %}
+  </div>
+  {% endfor %} {% endblock %}
+</div>
