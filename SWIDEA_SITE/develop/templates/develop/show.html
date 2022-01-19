@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %} {% if idea_yes %} {{idea.title}}
-<br />{%else %} {{tool.name}} {% endif %} {% endblock %} {%block content %}
-<br />{%if idea_yes %}
+{%else %} {{tool.name}} {% endif %} {% endblock %} {%block content %} <br />
+{%if idea_yes %}
 <h4 class="text-center">Idea Detail</h4>
 <div class="idea d-flex">
   <div class="idea__img me-5">
