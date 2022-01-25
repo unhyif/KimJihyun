@@ -1,0 +1,170 @@
+{% extends "base.html" %} {% block content %}
+<div class="posts d-flex flex-column align-items-center">
+  {% for post in posts %}
+  <div
+    id="post-{{post.id}}"
+    class="post border border-secondary d-flex flex-column align-items-center p-2 me-2 w-50"
+  >
+    <div class="post__img">
+      <img src="https://picsum.photos/200" alt="{{post.title}}" />
+    </div>
+    <h5 class="post__title">{{post.title}}</h6>
+    <div class="post__content">{{post.content}}</div>
+    <button class="btn btn-light likeBtn" onclick="onClickLike({{post.id}})"><span class="heart">🤍</span> <span class="num">{{post.like}}</span> Likes</button>
+    <div class="comments w-100">
+        {% for comment in post.comments.all %}
+        <div class="my-2 comment-{{comment.id}}"><span class="comment__author mx-3">{{comment.author}}</span><span class="comment__content">{{comment.content}}</span> <button class="btn btn-sm btn-danger" onclick="onClickDelete({{comment.id}})">-</button></div>
+        {% endfor %}
+    </div>
+        <form method="POST" id="form-{{post.id}}" class="d-flex align-items-center w-100 mt-2">
+            {% load widget_tweaks %}
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.author.errors }}
+        {{ form.author|add_class:"cform__author"|attr:"placeholder:이름" }}
+    </div>
+    <div class="fieldWrapper w-100">
+        {{ form.content.errors }}
+        {{ form.content|add_class:"cform__content"|attr:"placeholder:내용을 입력하세요" }}
+    </div>
+    <button class="writeBtn btn btn-sm btn-warning w-auto">Write</button>
+    </form>
+    </div>
+    {% endfor %}
+{% endblock %}
+
+{% block script %}
+<script>
+
+  // Like
+
+  const requestLike = new XMLHttpRequest();
+  const onClickLike = (id) => {
+    const post = document.querySelector(`#post-${id}`); // need to learn: event 일어난 button 자체 지정법
+    let action;
+    if (post.classList.contains("on")) {
+      action = "minus";
+    } else {
+      action = "plus";
+    }
+    post.classList.toggle("on");
+
+    const url = "/like/";
+    requestLike.open("POST", url, true);
+    requestLike.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestLike.send(JSON.stringify({ id: id, action: action }));
+  };
+
+  const likeHandleResponse = () => {
+    if (requestLike.status < 400) {
+      const { id, action } = JSON.parse(requestLike.response);
+      const heart = document.querySelector(`#post-${id} .heart`);
+      const num = document.querySelector(`#post-${id} .num`);
+      let hrt;
+      let cnt;
+
+      if (action === "plus") {
+        hrt = "💖";
+        cnt = Number(num.innerText) + 1;
+      } else {
+        hrt = "🤍";
+        cnt = Number(num.innerText) - 1;
+      }
+      heart.innerText = hrt;
+      num.innerText = cnt;
+    }
+  };
+
+  requestLike.onreadystatechange = () => {
+    if (requestLike.readyState === XMLHttpRequest.DONE) {
+      likeHandleResponse();
+    }
+  };
+
+  // Write a comment
+
+  const forms = document.querySelectorAll("form");
+  forms.forEach((value) => {
+    const id = Number(value.id.split("-")[1]);
+    value.addEventListener("submit", (e) => {
+      e.preventDefault(); // prevents reload, submits data but views.py does nothing
+      writeComment(id);
+    });
+  });
+
+  const requestWrite = new XMLHttpRequest();
+  const writeComment = (id) => {
+    const form = document.querySelector(`#form-${id}`);
+    const author = form.querySelector(".cform__author");
+    const content = form.querySelector(".cform__content");
+
+    const url = "/comment/";
+    if (author.value && content.value) {
+      // vaildty 검증 방법..?
+      requestWrite.open("POST", url, true);
+      requestWrite.setRequestHeader(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      );
+      requestWrite.send(
+        JSON.stringify({ id: id, author: author.value, content: content.value })
+      );
+      author.value = null;
+      content.value = null;
+    }
+  };
+
+  const writeHandleResponse = () => {
+    if (requestWrite.status < 400) {
+      const { id, comment_id, author, content } = JSON.parse(
+        requestWrite.response
+      );
+      const comments = document.querySelector(`#post-${id} .comments`);
+      const comment = document.createElement("div");
+      comment.classList.toggle("my-2");
+      comment.classList.toggle(`comment-${comment_id}`);
+      comment.innerHTML = `<span class="comment__author mx-3">${author}</span><span class="comment__content">${content}</span> <button class="btn btn-sm btn-danger" onclick="onClickDelete(${comment_id})">-</button>`;
+      comments.append(comment);
+    }
+  };
+
+  requestWrite.onreadystatechange = () => {
+    if (requestWrite.readyState === XMLHttpRequest.DONE) {
+      writeHandleResponse();
+    }
+  };
+
+  // Delete a comment
+
+  const requestDelete = new XMLHttpRequest();
+  const onClickDelete = (id) => {
+    const url = "/delete/";
+    requestDelete.open("POST", url, true);
+    requestDelete.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestDelete.send(JSON.stringify({ id: id }));
+  };
+
+  const deleteHandleResponse = () => {
+    if (requestDelete.status < 400) {
+      const { id } = JSON.parse(requestDelete.response);
+      console.log(id);
+      comment = document.querySelector(`.comment-${id}`);
+      comment.remove();
+    }
+  };
+
+  requestDelete.onreadystatechange = () => {
+    if (requestDelete.readyState === XMLHttpRequest.DONE) {
+      deleteHandleResponse();
+    }
+  };
+
+</script>
+{% endblock %}
