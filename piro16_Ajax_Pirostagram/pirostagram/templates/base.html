@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,53 +12,10 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap");
-      * {
-        outline: none;
-        font-family: "Nanum Gothic Coding", monospace;
-        margin: 0 !important;
-      }
-      input {
-        padding: 5px;
-        font-size: 12px;
-        text-align: center;
-      }
-      button {
-        box-shadow: none !important;
-      }
-      form {
-        gap: 5px;
-      }
-      .posts {
-        gap: 10px;
-      }
-      .post {
-        gap: 2px;
-      }
-      .cform__author,
-      .cform__content {
-        border-radius: 5px;
-        width: 80px;
-      }
-      .cform__author {
-        border: 1px solid rgb(185, 185, 185);
-      }
-      .cform__content {
-        border: none;
-        width: 100%;
-        background-color: ghostwhite;
-      }
-      .comment__author {
-        font-weight: 700;
-      }
-      .comment__content {
-        width: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body class="p-5">
-    {% block content %} {% endblock %} {% block script %} {% endblock %}
+    {% block content %} {% endblock %}
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
