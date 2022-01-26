@@ -2,14 +2,16 @@
 
 const requestLike = new XMLHttpRequest();
 const onClickLike = (id) => {
-  const post = document.querySelector(`#post-${id}`); // need to learn: event 일어난 button 자체 지정법
+  const post = document.querySelector(`.post[data-id="${id}"]`);
+
   let action;
-  if (post.classList.contains("on")) {
+  if (post.hasAttribute("data-liked")) {
     action = "minus";
+    post.removeAttribute("data-liked");
   } else {
     action = "plus";
+    post.setAttribute("data-liked", true);
   }
-  post.classList.toggle("on");
 
   const url = "/like/";
   requestLike.open("POST", url, true);
@@ -20,11 +22,11 @@ const onClickLike = (id) => {
   requestLike.send(JSON.stringify({ id: id, action: action }));
 };
 
-const likeHandleResponse = () => {
+const likeResHandler = () => {
   if (requestLike.status < 400) {
     const { id, action } = JSON.parse(requestLike.response);
-    const heart = document.querySelector(`#post-${id} .heart`);
-    const num = document.querySelector(`#post-${id} .num`);
+    const heart = document.querySelector(`.post[data-id="${id}"] .heart`);
+    const num = document.querySelector(`.post[data-id="${id}"] .num`);
     let hrt;
     let cnt;
 
@@ -42,7 +44,7 @@ const likeHandleResponse = () => {
 
 requestLike.onreadystatechange = () => {
   if (requestLike.readyState === XMLHttpRequest.DONE) {
-    likeHandleResponse();
+    likeResHandler();
   }
 };
 
@@ -50,44 +52,52 @@ requestLike.onreadystatechange = () => {
 
 const forms = document.querySelectorAll("form");
 forms.forEach((value) => {
-  const id = Number(value.id.split("-")[1]);
+  const post_id = Number(value.getAttribute("data-id"));
   value.addEventListener("submit", (e) => {
     e.preventDefault(); // prevents reload, submits data but views.py does nothing
-    writeComment(id);
+    writeComment(post_id);
   });
 });
 
 const requestWrite = new XMLHttpRequest();
-const writeComment = (id) => {
-  const form = document.querySelector(`#form-${id}`);
-  const author = form.querySelector(".cform__author");
-  const content = form.querySelector(".cform__content");
+const writeComment = (post_id) => {
+  const form = document.querySelector(`form[data-id="${post_id}"]`);
+  const author = form.querySelector(".form__author");
+  const content = form.querySelector(".form__content");
 
-  const url = "/comment/";
+  const url = "/write/";
   if (author.value && content.value) {
-    // vaildty 검증 방법..?
+    // validity 검증 방법..?
     requestWrite.open("POST", url, true);
     requestWrite.setRequestHeader(
       "Content-Type",
       "application/x-www-form-urlencoded"
     );
     requestWrite.send(
-      JSON.stringify({ id: id, author: author.value, content: content.value })
+      JSON.stringify({
+        post_id: post_id,
+        author: author.value,
+        content: content.value,
+      })
     );
     author.value = null;
     content.value = null;
   }
 };
 
-const writeHandleResponse = () => {
+const writeResHandler = () => {
   if (requestWrite.status < 400) {
-    const { id, comment_id, author, content } = JSON.parse(
+    const { post_id, comment_id, author, content } = JSON.parse(
       requestWrite.response
     );
-    const comments = document.querySelector(`#post-${id} .comments`);
+    const comments = document.querySelector(
+      `.post[data-id="${post_id}"] .comments`
+    );
+
     const comment = document.createElement("div");
+    comment.classList.toggle("comment");
     comment.classList.toggle("my-2");
-    comment.classList.toggle(`comment-${comment_id}`);
+    comment.setAttribute("data-id", comment_id);
     comment.innerHTML = `<span class="comment__author mx-3">${author}</span><span class="comment__content">${content}</span> <button class="btn btn-sm btn-danger" onclick="onClickDelete(${comment_id})">-</button>`;
     comments.append(comment);
   }
@@ -95,7 +105,7 @@ const writeHandleResponse = () => {
 
 requestWrite.onreadystatechange = () => {
   if (requestWrite.readyState === XMLHttpRequest.DONE) {
-    writeHandleResponse();
+    writeResHandler();
   }
 };
 
@@ -112,17 +122,16 @@ const onClickDelete = (id) => {
   requestDelete.send(JSON.stringify({ id: id }));
 };
 
-const deleteHandleResponse = () => {
+const deleteResHandler = () => {
   if (requestDelete.status < 400) {
     const { id } = JSON.parse(requestDelete.response);
-    console.log(id);
-    comment = document.querySelector(`.comment-${id}`);
+    comment = document.querySelector(`.comment[data-id="${id}"]`);
     comment.remove();
   }
 };
 
 requestDelete.onreadystatechange = () => {
   if (requestDelete.readyState === XMLHttpRequest.DONE) {
-    deleteHandleResponse();
+    deleteResHandler();
   }
 };

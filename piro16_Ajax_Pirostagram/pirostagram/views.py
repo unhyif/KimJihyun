@@ -25,29 +25,30 @@ def like(request):
     req = json.loads(request.body)
     post_id = req["id"]
     action = req["action"]
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, id=post_id)
 
     if action == "plus":
         post.like += 1
     else:
         post.like -= 1
     post.save()
+
     return JsonResponse({"id":post_id, "action":action})
 
 @csrf_exempt
-def comment(request):
+def write(request):
     req = json.loads(request.body)
-    post_id = req["id"]
+    post_id = req["post_id"]
     author = req["author"]
     content = req["content"]
-
     comment = Comment.objects.create(parent_post=get_object_or_404(Post, id=post_id), author=author, content=content)
-    return JsonResponse({"id":post_id, "comment_id":getattr(comment, "id"), "author":author, "content":content})
+
+    return JsonResponse({"post_id":post_id, "comment_id":getattr(comment, "id"), "author":author, "content":content})
 
 @csrf_exempt
 def delete(request):
     req = json.loads(request.body)
     comment_id = req["id"]
-    comment = get_object_or_404(Comment, id=comment_id)
-    comment.delete()
+    get_object_or_404(Comment, id=comment_id).delete()
+    
     return JsonResponse({"id":comment_id})

@@ -8,6 +8,6 @@ urlpatterns = [
     path('', home, name="home"),
     path('create/', create, name="create"),
     path('like/', like, name="like"),
-    path('comment/', comment, name="comment"),
+    path('write/', write, name="write"),
     path('delete/', delete, name="delete")
 ]
