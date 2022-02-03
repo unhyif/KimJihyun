@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div style="text-align: right;">
+<a href="/create" class="btn btn-sm btn-dark">Write a post</a>
+</div>
+<div class="posts d-flex flex-column align-items-center">
+  {% for post in posts %}
+  <div
+    data-id="{{post.id}}"
+    class="post border border-secondary d-flex flex-column align-items-center p-2 me-2 w-50"
+  >
+    <div class="post__img">
+      <img src="https://picsum.photos/200" alt="{{post.title}}" />
+    </div>
+    <h5 class="post__title mt-2">{{post.title}}</h6>
+    <div class="post__content text-center">{{post.content}}</div>
+    <button class="btn align-self-start" onclick="onClickLike({{post.id}})"><span class="heart">🤍</span> <span class="num">{{post.like}}</span> Likes</button>
+    <div class="comments w-100">
+        {% for comment in post.comments.all %}
+        <div data-id="{{comment.id}}" class="comment my-2"><span class="comment__author mx-3">{{comment.author}}</span><span class="comment__content">{{comment.content}}</span> <button class="btn btn-sm btn-danger" onclick="onClickDelete({{comment.id}})">-</button></div>
+        {% endfor %}
+    </div>
+        <form method="POST" data-id="{{post.id}}" class="d-flex align-items-center w-100 mt-2">
+            {% load widget_tweaks %}
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.author.errors }}
+        {{ form.author|add_class:"form__author"|attr:"placeholder:이름" }}
+    </div>
+    <div class="fieldWrapper w-100">
+        {{ form.content.errors }}
+        {{ form.content|add_class:"form__content"|attr:"placeholder:내용을 입력하세요" }}
+    </div>
+    <button class="btn btn-sm btn-warning w-auto">Write</button>
+    </form>
+    </div>
+    {% endfor %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

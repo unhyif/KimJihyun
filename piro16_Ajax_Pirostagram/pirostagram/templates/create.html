@@ -1,0 +1,8 @@
+{% extends "base.html" %} {% block content %}
+<div class="d-flex justify-content-center">
+  <form action="" method="POST" class="d-flex flex-column w-50">
+    {% csrf_token %} {{form}}
+    <button class="btn btn-primary w-25 mx-auto">Create</button>
+  </form>
+</div>
+{% endblock %}

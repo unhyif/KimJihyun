@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %} {% if idea_yes %} {{idea.title}}
+{%else %} {{tool.name}} {% endif %} {% endblock %} {%block content %} <br />
+{%if idea_yes %}
+<h4 class="text-center">Idea Detail</h4>
+<div class="idea d-flex">
+  <div class="idea__img me-5">
+    {% if idea.image %}
+    <img src="{{idea.image.url}}" width="150" height="225" />
+    {% else %}
+    <img src="https://picsum.photos/seed/{{idea.id}}/150/225" />
+    {% endif %}
+  </div>
+  <div class="idea__content">
+    <h2>{{idea.title}}</h2>
+    <ol>
+      <li>아이디어 관심도 : {{idea.interest}}</li>
+      <li>
+        예상 개발툴 :
+        <a href="{% url 'develop:show_tool' pk=idea.devtool.id %}"
+          >{{idea.devtool}}</a
+        >
+      </li>
+      <li>아이디어 설명 : {{idea.content}}</li>
+    </ol>
+  </div>
+</div>
+<div class="btn-container d-flex justify-content-center w-100">
+  <a href="{% url 'develop:delete_idea' idea.id %}" class="btn btn-danger"
+    >삭제</a
+  >
+  <a href="/" class="btn btn-white">목록</a>
+  <a href="{% url 'develop:edit_idea' idea.id %}" class="btn btn-primary"
+    >수정</a
+  >
+</div>
+
+{% else %}
+<h4 class="text-center">DevTool Detail</h4>
+<div class="tool">
+  <div class="tool__content">
+    <h2>{{tool.name}}</h2>
+    <p>✔ {{tool.kind}}</p>
+    <p>👉 {{tool.description}}</p>
+  </div>
+  <div class="tool__ideas">
+    <h5>> 만들 수 있는 SW 목록</h5>
+    <ul>
+      {% for idea in tool.ideas.all %}
+      <li>
+        <a href="{% url 'develop:show_idea' pk=idea.id %}">{{idea.title}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="btn-container d-flex justify-content-center w-100">
+  <a href="{% url 'develop:delete_tool' tool.id %}" class="btn btn-danger"
+    >삭제</a
+  >
+  <a href="/tools" class="btn btn-white">목록</a>
+  <a href="{% url 'develop:edit_tool' tool.id %}" class="btn btn-primary"
+    >수정</a
+  >
+</div>
+{% endif %} {% endblock %}

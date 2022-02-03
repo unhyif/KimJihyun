@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% load bootstrap5 %} {% bootstrap_css %} {%
+bootstrap_javascript %} {% block title %} {% if pk %} Edit Devtool {% else %}
+Register Devtool {% endif %} {% endblock %} {% block content %} {% if pk %}
+<h4 class="text-center">Edit Devtool</h4>
+{% else %}
+<h4 class="text-center">Register Devtool</h4>
+{% endif %}
+<div class="d-flex justify-content-center w-100">
+  <form action="" method="POST" class="w-50">
+    {% csrf_token %}
+    <table>
+      {% bootstrap_form form %}
+    </table>
+    {% if pk %}
+    <button type="submit" class="btn btn-primary">Update</button>
+    {% else %}
+    <button type="submit" class="btn btn-success">Register</button>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}
