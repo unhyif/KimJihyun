@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def list_idea(request):
     objects = Idea.objects.all()   
@@ -71,3 +74,18 @@ def delete_tool(request, pk):
     tool = get_object_or_404(Tool, id=pk)
     tool.delete()
     return redirect("develop:list_tool")
+
+@csrf_exempt
+def edit_interest(request):
+    req = json.loads(request.body)
+    idea_id = req["id"]
+    btn_type = req["type"]
+    idea = get_object_or_404(Idea, id=idea_id)
+
+    if btn_type == "plus":
+        idea.interest += 1
+    else:
+        idea.interest -= 1
+    idea.save()
+
+    return JsonResponse({"id":idea_id, "type":btn_type})

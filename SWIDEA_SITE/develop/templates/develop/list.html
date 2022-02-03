@@ -6,6 +6,7 @@
   {% for object in objects %}
   <div
     class="object me-4 border border-2 border-light d-flex flex-column align-items-center"
+    data-id="{{object.id}}"
   >
     {% if idea_yes %} {% if object.image %}
     <img src="{{object.image.url}}" width="150" height="225" />
@@ -18,9 +19,15 @@
     <div>예상 개발툴 : {{object.devtool}}</div>
     <div>
       아이디어 관심도 : <span class="interest">{{object.interest}}</span>
-      <button class="plus btn btn-sm btn-warning me-2 text-white fw-bold">
+      <button
+        class="plus btn btn-sm btn-warning me-2 text-white fw-bold plus-btn"
+        onclick="onClickInterest({{object.id}}, 'plus')"
+      >
         +</button
-      ><button class="minus btn btn-sm btn-warning text-white fw-bold">
+      ><button
+        class="minus btn btn-sm btn-warning text-white fw-bold minus-btn"
+        onclick="onClickInterest({{object.id}}, 'minus')"
+      >
         -
       </button>
     </div>

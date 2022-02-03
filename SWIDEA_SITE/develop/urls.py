@@ -15,5 +15,7 @@ urlpatterns = [
     path('create/idea', create_idea, name="create_idea"),
     path('idea/<int:pk>', show_idea, name="show_idea"),
     path('edit/idea/<int:pk>', edit_idea, name="edit_idea"),
-    path('delete/idea/<int:pk>', delete_idea, name="delete_idea")
+    path('delete/idea/<int:pk>', delete_idea, name="delete_idea"),
+
+    path('interest/', edit_interest, name="interest")
 ]
