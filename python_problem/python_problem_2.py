@@ -23,8 +23,8 @@ def Menu3():
 name      mid       final     grade
 ------------------------------------'''
 )
-    for name in data:
-        print(name.ljust(10) + str(data[name].get("mid")).ljust(10) + str(data[name].get("final")).ljust(10) + data[name].get("grade"))
+    for name, info in data.items():
+        print(name.ljust(10) + str(info.get("mid")).ljust(10) + str(info.get("final")).ljust(10) + info.get("grade"))
 
 
 def Menu4(del_name=""):
