@@ -6,4 +6,11 @@
 
 - Input validation using `while` loop
 - Error handling using `try-except`
-- How to use `dictionary` as a database
+
+## Updates
+
+#### 220305
+
+- Renamed variables
+- Removed repeated if statement
+- Used `dictionary` as a database instead of `list`
