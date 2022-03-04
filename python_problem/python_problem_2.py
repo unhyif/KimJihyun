@@ -1,19 +1,21 @@
 data = {}
 
 def Menu1(name="", mid_score=0, final_score=0):
-    data[name] = [mid_score, final_score]
+    data[name] = {"mid": mid_score, "final": final_score}
 
-def Menu2(person=""):
-    avg = sum(data[person]) / 2
+
+def Menu2(name=""):
+    avg = (data[name].get("mid") + data[name].get("final")) / 2
 
     if avg < 70:
-        data[person].append("D")
+        data[name]["grade"] = "D"
     elif avg < 80:
-        data[person].append("C")
+        data[name]["grade"] = "C"
     elif avg < 90:
-        data[person].append("B")
+        data[name]["grade"] = "B"
     else:
-        data[person].append("A")
+        data[name]["grade"] = "A"
+
 
 def Menu3():
     print('''
@@ -21,8 +23,9 @@ def Menu3():
 name      mid       final     grade
 ------------------------------------'''
 )
-    for person in data:
-        print(person.ljust(10) + str(data[person][0]).ljust(10) + str(data[person][1]).ljust(10) + data[person][2])
+    for name in data:
+        print(name.ljust(10) + str(data[name].get("mid")).ljust(10) + str(data[name].get("final")).ljust(10) + data[name].get("grade"))
+
 
 def Menu4(del_name=""):
     del data[del_name]
@@ -42,13 +45,14 @@ while True:
         info = input("Enter name mid-score final-score : ").split()
 
         try:
-            if len(info) != 3: # 입력된 데이터 갯수가 3이 아닐 때
+            if len(info) != 3:
                 raise Exception("Num of data is not 3!")
 
             name, mid_score, final_score = info
 
             if name in data: # 이미 존재하는 이름일 때
-                raise Exception("Already exist name!")
+                raise Exception("This name already exists!")
+
             if not((mid_score.isdigit() and int(mid_score) != 0) and \
                 (final_score.isdigit() and int(final_score) != 0)): # 점수 값이 양의 정수가 아닐 때
                 raise Exception("Score is not positive integer!")
@@ -58,32 +62,35 @@ while True:
         except Exception as e:
             print(e)
 
+
     elif choice == "2":
         try:
             if not data:
                 raise Exception("No student data!")
 
             print("Grading to all students.")
-            for person in data:
-                if len(data[person]) != 3: # 학점이 부여되지 않은 학생에 대해
-                    Menu2(person)
+            for name in data:
+                if len(data[name]) != 3: # 학점이 부여되지 않은 학생에 대해
+                    Menu2(name)
 
         except Exception as e:
             print(e)
+
 
     elif choice == "3":
         try:
             if not data:
                 raise Exception("No student data!")
 
-            for person in data:
-                if len(data[person]) != 3: # 학점이 부여되지 않은 학생이 있을 때
+            for name in data:
+                if len(data[name]) != 3: # 학점이 부여되지 않은 학생이 있을 때
                     raise Exception("There is a student who didn't get grade.")
 
-            Menu3() # 모든 학생들의 학점이 부여됐을 때
+            Menu3()
         
         except Exception as e:
             print(e)
+
 
     elif choice == "4":
         try:
@@ -93,13 +100,14 @@ while True:
             del_name = input("Enter the name to delete : ")
 
             if del_name not in data:
-                raise Exception("Not exist name!")
+                raise Exception("This name doesn't exist!")
             
-            Menu4(del_name)
             print(f"{del_name} student information is deleted.")
+            Menu4(del_name)
 
         except Exception as e:
             print(e)
+
 
     elif choice == "5":
         print("Exit Program!")
