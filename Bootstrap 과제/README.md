@@ -8,14 +8,14 @@
 
 [click](https://unhyif.github.io/piro16_assignments/Bootstrap%20%EA%B3%BC%EC%A0%9C/bootstrap.html)
 
----
-
 ## TIL
 
 #### 220104
 
 - Bootstrap's responsive Grid system
 - How to use modal plugin
+
+<hr>
 
 ## Updates
 
