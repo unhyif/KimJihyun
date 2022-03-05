@@ -7,6 +7,8 @@
 - Input validation using `while` loop
 - Error handling using `try-except`
 
+<hr>
+
 ## Updates
 
 #### 220305
